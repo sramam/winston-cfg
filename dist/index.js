@@ -15,9 +15,11 @@ const config = require('config');
 ;
 function winstonCfg(transportMap = {}) {
     const cfg = lodash_1.merge({
-        transports: [],
+        transports: [{
+                type: 'Console'
+            }],
         level: 'info'
-    }, config.get('winston'));
+    }, (config.has('winston') ? config.get('winston') : {}));
     const { transports, loggers } = cfg, rest = __rest(cfg, ["transports", "loggers"]);
     const _transports = makeTransportsArray(transports, transportMap);
     winston.configure(Object.assign({}, rest, { transports: _transports }));
