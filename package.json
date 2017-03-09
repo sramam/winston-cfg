@@ -1,7 +1,7 @@
 {
   "name": "winston-cfg",
   "version": "1.0.0",
-  "description": "Enables winston configuration via [node-config](https://github.com/lorenwest/node-config)",
+  "description": "Enables [winston](https://github.com/winstonjs/winston) configuration via [node-config](https://github.com/lorenwest/node-config)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
