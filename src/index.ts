@@ -57,9 +57,11 @@ interface Config {
 
 export function winstonCfg(transportMap = {}) {
   const cfg = merge({
-    transports: [],
+    transports: [{
+      type: 'Console'
+    }],
     level: 'info'
-  }, config.get('winston'));
+  }, (config.has('winston') ? config.get('winston') : {}));
 
   const { transports, loggers, ...rest } = cfg;
   const _transports = makeTransportsArray(transports, transportMap);
