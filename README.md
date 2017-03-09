@@ -9,8 +9,8 @@ A simple utility that enables [winston](https://github.com/winstonjs/winston) co
 For most common use cases, there are three things that one needs to configure with winston:
 
 1. _transports_: the destination(s) for the logs. Winston provides a few out of the box. Transports with external dependencies,  with external dependencies are supported as 3rd party modules. Depending on the actual transport, some have pretty involved configuration.
-2. _loggers_: an ability to segment logging capability, for example by application layer (app, http, db etc). By default, it creates a global logger, that uses a 'Console' transport to log to console, at 'info' level. Each logger can have multiple transports - either the global or a custom set.
-3. _default logger_: `winston` instantiate a default logger which can be configured in exactly the same manner as any logger.
+2. _loggers_: an ability to segment logging capability, for example by application layer (app, http, db etc). Each logger can have multiple transports - either the global or a custom set.
+3. _default logger_: `winston` instantiate a default logger that is configured with a 'Console' transport and set to 'info' level. This can be configured in exactly the same manner as any logger.
 
 `winstonCfg.Config` defines a TypeScript interface that enumerates all config possible on a logger.
 
