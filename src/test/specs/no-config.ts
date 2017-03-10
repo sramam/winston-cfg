@@ -11,10 +11,10 @@ function unrequire(module) {
 }
 
 const fixture = `
-info: 1 main starting
-info: 3 timer started
-info: 4 timer expired
-info: 5 program exiting`;
+\u001b[32minfo\u001b[39m: 1 main starting
+\u001b[32minfo\u001b[39m: 3 timer started
+\u001b[32minfo\u001b[39m: 4 timer expired
+\u001b[32minfo\u001b[39m: 5 program exiting`;
 
 describe('winston-cfg', () => {
   it('no-config', async () => {
@@ -36,6 +36,6 @@ describe('winston-cfg', () => {
       .split('\n')
       .sort(logSorter);
     const expected = fixture.trim().split('\n').sort(logSorter);
-    expect(expected).to.deep.equal(actual);
+    expect(expected).to.deep.equal(actual, actual);
   });
 });

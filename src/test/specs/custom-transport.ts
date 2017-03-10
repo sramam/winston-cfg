@@ -11,12 +11,12 @@ function unrequire(module) {
 }
 
 const fixture = `
-debug: [app] 11 timer expired
-debug: [app] 2 main starting
-debug: [app] 5 promise initialized
+\u001b[34mdebug\u001b[39m: [app] 11 timer expired
+\u001b[34mdebug\u001b[39m: [app] 2 main starting
+\u001b[34mdebug\u001b[39m: [app] 5 promise initialized
 error: [def] 9 app2: timer started
-info: [app] 14 program exiting
-info: [app] 8 timer started
+\u001b[32minfo\u001b[39m: [app] 14 program exiting
+\u001b[32minfo\u001b[39m: [app] 8 timer started
 info: [def] 1 main starting
 info: [def] 10 timer expired
 info: [def] 12 app2: timer expired

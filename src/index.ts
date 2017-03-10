@@ -85,12 +85,16 @@ export function winstonCfg(transportMap = {}, defaultCfg?: Config) {
 
 function makeTransportsArray(transports = [], transportMap) {
   return transports.map(t => {
+    let colorize = t.colorize || false;
     switch (t.type) {
       case 'Console':
+        colorize = true;
       case 'File':
       case 'Http':
       case 'Memory':
-        return new winston.transports[t.type](t);
+        const transport = new winston.transports[t.type](t);
+        transport.colorize = colorize;
+        return transport;
       default: {
         if (t.type in transportMap) {
           return new transportMap[t.type](t);
