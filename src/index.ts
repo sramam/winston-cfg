@@ -4,8 +4,8 @@ import * as winston from 'winston';
 
 const config = require('config');
 
-type Fn = (level: string, msg: string, meta: any) => void;
-interface Config {
+export type Fn = (level: string, msg: string, meta: any) => void;
+export interface Config {
   /**
    *
    * @type {string}
@@ -55,13 +55,17 @@ interface Config {
   filters?: Fn[];
 };
 
-export function winstonCfg(transportMap = {}) {
-  const cfg = merge({
-    transports: [{
-      type: 'Console'
-    }],
-    level: 'info'
-  }, (config.has('winston') ? config.get('winston') : {}));
+export function winstonCfg(transportMap = {}, defaultCfg?: Config) {
+  const cfg = merge(
+    {
+      transports: [{
+        type: 'Console'
+      }],
+      level: 'info'
+    },
+    defaultCfg,
+    (config.has('winston') ? config.get('winston') : {})
+  );
 
   const { transports, loggers, ...rest } = cfg;
   const _transports = makeTransportsArray(transports, transportMap);
