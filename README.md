@@ -1,4 +1,12 @@
 # winston-cfg
+<!-- badge -->
+[![npm license](https://img.shields.io/npm/l/winston-cfg.svg)](https://www.npmjs.com/package/winston-cfg)
+[![travis status](https://img.shields.io/travis/sramam/winston-cfg.svg)](https://travis-ci.org/sramam/winston-cfg)
+[![Build status](https://ci.appveyor.com/api/projects/status/g7ev07vefgqxl70x?svg=true)](https://ci.appveyor.com/project/sramam/winston-cfg)
+[![Coverage Status](https://coveralls.io/repos/github/sramam/winston-cfg/badge.svg?branch=master)](https://coveralls.io/github/sramam/winston-cfg?branch=master)
+[![David](https://david-dm.org/sramam/winston-cfg/status.svg)](https://david-dm.org/sramam/winston-cfg)
+[![David](https://david-dm.org/sramam/winston-cfg/dev-status.svg)](https://david-dm.org/sramam/winston-cfg?type=dev)
+<!-- endbadge -->
 
 A simple utility that enables [winston](https://github.com/winstonjs/winston) configuration via [node-config](https://github.com/lorenwest/node-config)")
 
