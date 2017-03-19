@@ -22,7 +22,26 @@ For most common use cases, there are three things that one needs to configure wi
 2. _loggers_: an ability to segment logging capability, for example by application layer (app, http, db etc). Each logger can have multiple transports - either the global or a custom set.
 3. _default logger_: `winston` instantiate a default logger that is configured with a 'Console' transport and set to 'info' level. This can be configured in exactly the same manner as any logger.
 
-`winstonCfg.Config` defines a TypeScript interface that enumerates all config possible on a logger.
+
+```
+                 +-------------------------------------------+
+                 |            winston configuration          |
++-------------+  |                                           |
+| APPLICATION    |       +----------+                        |
+|             |  |  +--> | Default  +--+                     |
+|             |  |  |    +----------+  |                     |
+| +---------+ |  |  |    +----------+  |   +-------------+   |
+| | Layer 1 +----------> | Logger 1 +----> | Transport A +--------->
+| +---------+ |  |       +----------+      +-------------+   |
+|     ...     |  |                                           |
+| +---------+ |  |       +----------+      +-------------+   |
+| | Layer N +----------> | Logger 1 +----> | Transport B +--------->
+| +---------+ |  |       +----------+      +-------------+   |
++-------------+  |                                           |
+                 |                                           |
+                 +-------------------------------------------+
+
+```
 
 
 ## transportMap
