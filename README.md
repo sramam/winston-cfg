@@ -6,7 +6,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/sramam/winston-cfg/badge.svg?branch=master)](https://coveralls.io/github/sramam/winston-cfg?branch=master)
 [![David](https://david-dm.org/sramam/winston-cfg/status.svg)](https://david-dm.org/sramam/winston-cfg)
 [![David](https://david-dm.org/sramam/winston-cfg/dev-status.svg)](https://david-dm.org/sramam/winston-cfg?type=dev)
-[![NPM](https://nodei.co/npm/winston-cfg.png)](https://nodei.co/npm/winston-cfg/)
+<br/>
+[![NPM](https://nodei.co/npm/winston-cfg.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/winston-cfg/)
 <!-- endbadge -->
 
 A simple utility that enables [winston](https://github.com/winstonjs/winston) configuration via [node-config](https://github.com/lorenwest/node-config)
