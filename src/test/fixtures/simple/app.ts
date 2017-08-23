@@ -8,9 +8,11 @@ import { winstonCfg } from '../../..';
 import * as fs from 'fs';
 const winston = winstonCfg();
 
-const log = winston;
+// in case the test case wants to access the log
+export const log = winston;
 const app = winston.loggers.get('app');
 const app2 = winston.loggers.get('app2');
+
 
 export async function main() {
   let idx = 1;
@@ -34,4 +36,4 @@ export async function main() {
   log.info(`${idx++} program exiting`);
   app.info(`${idx++} program exiting`);
   app2.info(`${idx++} app2: program exiting`);
-};
+}

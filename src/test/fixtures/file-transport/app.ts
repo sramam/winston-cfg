@@ -41,4 +41,5 @@ export async function main() {
   log.info(`${idx++} program exiting`);
   app.info(`${idx++} program exiting`);
   app2.info(`${idx++} app2: program exiting`);
+
 }

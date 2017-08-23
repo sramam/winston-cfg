@@ -14,7 +14,8 @@ const transportMap = {
 
 const winston = winstonCfg(transportMap);
 
-const log = winston;
+// in case the test case wants to access the log
+export const log = winston;
 
 export async function main() {
   let idx = 1;
@@ -28,4 +29,4 @@ export async function main() {
     log.info(`${idx++} timer started`);
   });
   log.info(`${idx++} program exiting`);
-};
+}

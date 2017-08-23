@@ -11,8 +11,9 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const lodash_1 = require("lodash");
 const winston = require("winston");
+const mkdirp = require("mkdirp");
+const path = require("path");
 const config = require('config');
-;
 function winstonCfg(transportMap = {}, defaultCfg) {
     const cfg = lodash_1.merge({
         transports: [{
@@ -32,22 +33,23 @@ function makeTransportsArray(transports = [], transportMap) {
     return transports.map(t => {
         let colorize = t.colorize || false;
         switch (t.type) {
-            case 'Console':
+            case 'Console': {
                 colorize = true;
-            case 'File':
-            case 'Http':
-            case 'Memory':
-                const transport = new winston.transports[t.type](t);
-                transport.colorize = colorize;
-                return transport;
-            default: {
-                if (t.type in transportMap) {
-                    return new transportMap[t.type](t);
-                }
-                else {
-                    throw new Error(`Unknown transport '${t.type}' in map:'${JSON.stringify(transportMap)}'`);
-                }
+                break;
             }
+            case 'File': {
+                mkdirp(path.dirname(t.filename));
+                break;
+            }
+        }
+        const Transport = winston.transports[t.type] || transportMap[t.type] || null;
+        if (Transport) {
+            const transport = new Transport(t);
+            transport.colorize = colorize;
+            return transport;
+        }
+        else {
+            throw new Error(`Unknown transport '${t.type}' in map:'${JSON.stringify(transportMap)}'`);
         }
     });
 }

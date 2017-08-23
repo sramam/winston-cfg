@@ -1,6 +1,8 @@
 
 import { merge } from 'lodash';
 import * as winston from 'winston';
+import * as mkdirp from 'mkdirp';
+import * as path from 'path';
 
 const config = require('config');
 
@@ -53,7 +55,7 @@ export interface Config {
   colors?: string[];
   rewriters?: Fn[];
   filters?: Fn[];
-};
+}
 
 export function winstonCfg(transportMap = {}, defaultCfg?: Config) {
   const cfg = merge(
@@ -87,21 +89,27 @@ function makeTransportsArray(transports = [], transportMap) {
   return transports.map(t => {
     let colorize = t.colorize || false;
     switch (t.type) {
-      case 'Console':
+      case 'Console': {
         colorize = true;
-      case 'File':
-      case 'Http':
-      case 'Memory':
-        const transport = new winston.transports[t.type](t);
-        transport.colorize = colorize;
-        return transport;
-      default: {
-        if (t.type in transportMap) {
-          return new transportMap[t.type](t);
-        } else {
-          throw new Error(`Unknown transport '${t.type}' in map:'${JSON.stringify(transportMap)}'`);
-        }
+        break;
       }
+      case 'File': {
+        // ensure that log directory exists. winston refuses
+        // to auto-create https://github.com/winstonjs/winston/issues/579
+        mkdirp(path.dirname(t.filename));
+        break;
+      }
+      // case 'Http':
+      // case 'Memory':
+      // default:
+    }
+    const Transport = winston.transports[t.type] || transportMap[t.type] || null;
+    if (Transport) {
+      const transport = new Transport(t);
+      transport.colorize = colorize;
+      return transport;
+    } else {
+      throw new Error(`Unknown transport '${t.type}' in map:'${JSON.stringify(transportMap)}'`);
     }
   });
 }
