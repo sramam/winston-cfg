@@ -130,6 +130,7 @@
     "nsp": "^2.6.1",
     "nsp-formatter-checkstyle": "^1.0.1",
     "nsp-formatter-remarkup": "^1.0.2",
+    "parse-git-config": "^1.1.1",
     "pkg-ok": "^1.0.1",
     "remap-istanbul": "^0.9.1",
     "rimraf": "^2.5.4",
