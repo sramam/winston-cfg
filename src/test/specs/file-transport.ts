@@ -45,7 +45,7 @@ describe('winston-cfg', function () {
         delete el.timestamp;
         return el;
       });
-    const output = fs.readFileSync(outFname, 'utf8').trim().split('\n');
+    const output = fs.readFileSync(outFname, 'utf8').toString().trim().split('\n');
     const actual = output.map(
       el => {
         el = JSON.parse(el);
