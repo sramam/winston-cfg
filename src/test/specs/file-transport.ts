@@ -36,7 +36,7 @@ describe('winston-cfg', function () {
     await (new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve();
-      }, 400);
+      }, 1000);
     }));
 
     let expected = require('../fixtures/file-transport/expected').default;
