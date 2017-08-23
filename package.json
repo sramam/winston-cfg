@@ -18,25 +18,32 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "scripts"
   ],
   "scripts": {
     "staged-mods-ok": "git-mods --staged_ok",
     "no-mods": "git-mods",
     "clean": "rimraf build coverage",
     "clean:dist": "rimraf dist",
+    "clean:ts-cover": "rimraf coverage/typescript",
+    "init:ts-cover": "mkdirp coverage/typescript",
     "lint": "tslint -c tslint.json src/**/*.ts",
     "compile:build": "tsc",
     "compile:dist": "tsc -p tsconfig.dist.json",
     "compile:watch": "tsc -w",
     "sh": "npm-sh",
     "secure": "nsp check",
-    "check": "ncu -e 1",
-    "test-with-cover": "istanbul cover ./node_modules/.bin/_mocha",
-    "test-without-cover": "mocha",
-    "remap-coverage:dist": "node ./scripts/remapped-coverage.js --force_min_cover true --output ./coverage/typescript",
-    "remap-coverage": "node ./scripts/remapped-coverage.js --force_min_cover=false --output ./coverage/typescript",
-    "coverage": "istanbul check-coverage ./coverage/typescript/coverage.json",
+    "check": "npm outdated",
+    "coverage": "run-batch",
+    "coverage:dist": "run-batch",
+    "remap-html": "remap-istanbul -i coverage/coverage.json -o coverage/typescript -t html",
+    "remap-json": "remap-istanbul -i coverage/coverage.json -o coverage/typescript/coverage.json -t json",
+    "remap-lcov": "remap-istanbul -i coverage/coverage.json -o coverage/typescript/lcov.info -t lcovonly",
+    "coverage-report": "istanbul report --include=coverage/typescript/coverage.json text-summary",
+    "check-coverage": "istanbul check-coverage --include coverage/typescript/coverage.json",
+    "test-with-cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- --opts mocha.opts",
+    "test-without-cover": "mocha --opts mocha.opts",
     "build": "npm-run-batch",
     "build:dist": "run-batch",
     "build:watch": "cross-env NODE_ENV=production run-batch",
@@ -44,12 +51,12 @@
     "test:dist": "run-batch",
     "pkg-ok": "pkg-ok",
     "precommit": "run-batch",
-    "prepush": "run-batch"
+    "prepush": "run-batch",
+    "postinstall": "node ./scripts/postinstall.js"
   },
   "run-batch": {
     "build": [
       "clean",
-      "pkg-ok",
       "lint",
       "compile:build",
       "test"
@@ -58,29 +65,44 @@
       "compile:watch"
     ],
     "build:dist": [
-      "pkg-ok",
       "lint",
       "clean",
       "compile:build",
       "test:dist",
       "clean:dist",
-      "compile:dist"
+      "compile:dist",
+      "pkg-ok"
     ],
     "test:dist": [
       "test-with-cover",
-      "remap-coverage:dist"
+      "coverage:dist"
     ],
     "test": [
       "test-with-cover",
-      "remap-coverage"
+      "coverage"
+    ],
+    "coverage": [
+      "clean:ts-cover",
+      "init:ts-cover",
+      "remap-html",
+      "remap-json",
+      "coverage-report"
+    ],
+    "coverage:dist": [
+      "clean:ts-cover",
+      "init:ts-cover",
+      "remap-html",
+      "remap-json",
+      "coverage-report",
+      "check-coverage"
     ],
     "precommit": [
-      "build",
+      "postinstall",
+      "build:dist",
       "staged-mods-ok"
     ],
     "prepush": [
       "build:dist",
-      "check",
       "secure",
       "no-mods"
     ]
