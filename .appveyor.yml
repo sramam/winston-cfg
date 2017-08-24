@@ -20,7 +20,7 @@ build_script:
   - node --version
   - npm --version
   - npm run prepush
-  - git diff dist
+  - git diff yarn.lock
 
 # Post-install test scripts.
 # test_script:
