@@ -34,6 +34,7 @@ describe('winston-cfg', () => {
       .join('')
       .trim()
       .split('\n')
+      .map(r => r.trim()) // removes `\r` on windows
       .sort(logSorter);
     const expected = fixture.trim().split('\n').sort(logSorter);
     expect(expected).to.deep.equal(actual, actual);
