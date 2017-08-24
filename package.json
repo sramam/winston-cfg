@@ -111,7 +111,7 @@
     "@types/chai": "^4.0.4",
     "@types/circular-json": "^0.1.29",
     "@types/mocha": "^2.2.29",
-    "@types/node": "^8.0.24",
+    "@types/node": "^8.0.25",
     "@types/semver": "^5.3.29",
     "chai": "^4.1.1",
     "chalk": "^2.1.0",
@@ -137,7 +137,7 @@
     "shelljs-nodecli": "^0.1.1",
     "std-mocks": "^1.0.1",
     "tslint": "^5.6.0",
-    "typescript": "^2.2.1"
+    "typescript": "^2.4.2"
   },
   "dependencies": {
     "config": "^1.25.1",
