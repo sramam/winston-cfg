@@ -1,4 +1,5 @@
 # winston-cfg
+
 <!-- badge -->
 [![npm license](https://img.shields.io/npm/l/winston-cfg.svg)](https://www.npmjs.com/package/winston-cfg)
 [![travis status](https://img.shields.io/travis/sramam/winston-cfg.svg)](https://travis-ci.org/sramam/winston-cfg)
@@ -12,18 +13,17 @@
 
 A simple utility that enables [winston](https://github.com/winstonjs/winston) configuration via [node-config](https://github.com/lorenwest/node-config)
 
-# Usage
+## Usage
 
-## A brief introduction to winston internals
+### A brief introduction to winston internals
 
 For most common use cases, there are three things that one needs to configure with winston:
 
 1. _transports_: the destination(s) for the logs. Winston provides a few out of the box. Transports with external dependencies,  with external dependencies are supported as 3rd party modules. Depending on the actual transport, some have pretty involved configuration.
-2. _loggers_: an ability to segment logging capability, for example by application layer (app, http, db etc). Each logger can have multiple transports - either the global or a custom set.
-3. _default logger_: `winston` instantiate a default logger that is configured with a 'Console' transport and set to 'info' level. This can be configured in exactly the same manner as any logger.
+1. _loggers_: an ability to segment logging capability, for example by application layer (app, http, db etc). Each logger can have multiple transports - either the global or a custom set.
+1. _default logger_: `winston` instantiate a default logger that is configured with a 'Console' transport and set to 'info' level. This can be configured in exactly the same manner as any logger.
 
-
-```
+```bash
                  +-------------------------------------------+
                  |            winston configuration          |
 +-------------+  |                                           |
@@ -31,10 +31,10 @@ For most common use cases, there are three things that one needs to configure wi
 |             |  |  +--> | Default  +--+                     |
 |             |  |  |    +----------+  |                     |
 | +---------+ |  |  |    +----------+  |   +-------------+   |
-| | Layer 1 +----------> | Logger 1 +----> | Transport A +--------->
-| +---------+ |  |       +----------+      +-------------+   |
-|     ...     |  |                                           |
-| +---------+ |  |       +----------+      +-------------+   |
+| | Layer 1 +----------> | Logger 1 +-+--> | Transport A +--------->
+| +---------+ |  |       +----------+ |    +-------------+   |
+|     ...     |  |                    |                      |
+| +---------+ |  |       +----------+ +--> +-------------+   |
 | | Layer N +----------> | Logger 1 +----> | Transport B +--------->
 | +---------+ |  |       +----------+      +-------------+   |
 +-------------+  |                                           |
@@ -43,19 +43,55 @@ For most common use cases, there are three things that one needs to configure wi
 
 ```
 
+### Simple Configuraton
 
-## transportMap
+Please see the interface definition in [src/index.ts:Config](https://github.com/sramam/winston-cfg/blob/master/src/index.ts#L10) for details
+on valid config settings.
 
-Since transports may be external modules, `winston` expects to be provided instances of transports associated with a logger - global or custom.
+And [node-config](https://github.com/lorenwest/node-config) for use of the config module.
 
-We are however attempting to expose only the config capability. As a compromise, `winston-cfg` adds a 'type' property to the config. The application also has to instantiate a `transportMap`, which allows the `winston-cfg` to create appropriate transports before instantiating loggers.
+```json
+// in config/defaults.json
+{
+  "winston": {
+    "level": "info",
+    "transports": [{
+      "type": "Console"
+    }]
+  }
+}
+```
 
-By default, `winston-core` supports four transports: `Console`, `File`, `Http` & `Memory`. Additionally, [3rd-party transports] (https://github.com/winstonjs/winston/blob/master/docs/transports.md) extend support for other storage mechanisms.
+```javascript
+const log = require('winston-cfg').winstonCfg();
+```
 
+```typescript
+import { winstonCfg } from 'winston-cfg';
+const log = winstongCfg();
+```
 
-# Config file
+### Advanced Configuration
 
-```js
+#### transportMap
+
+Since transports may be external modules, `winston` expects to be provided
+instances of transports associated with a logger - global or custom.
+
+We are however attempting to expose only the config capability. As a compromise, `winston-cfg` adds a 'type' property to the config. The application also has to instantiate a `transportMap`, which allows the `winston-cfg` to create
+appropriate transports before instantiating loggers.
+
+By default, `winston-core` supports four transports: `Console`, `File`, `Http` & `Memory`. Additionally, [3rd-party transports](https://github.com/winstonjs/winston/blob/master/docs/transports.md)
+extend support for other storage mechanisms.
+
+##### Config file
+
+Please see the interface definition in [src/index.ts:Config](https://github.com/sramam/winston-cfg/blob/master/src/index.ts#L10) for details
+on valid config settings.
+
+And [node-config](https://github.com/lorenwest/node-config) for use of the config module.
+
+```json
 {
   "winston": {
     "level": "info",
@@ -86,7 +122,8 @@ By default, `winston-core` supports four transports: `Console`, `File`, `Http` &
 }
 ```
 
-### TypeScript boilerplate
+##### TypeScript boilerplate
+
 ```typescript
 
 // do this in your application startup
@@ -115,7 +152,8 @@ const http_log = winston.loggers.get('http');
 // use log, app_log & http_log as needed.
 ```
 
-### JavaScript boilerplate:
+##### JavaScript boilerplate
+
 ```js
 const logger = 'winston-cfg';
 
@@ -142,11 +180,14 @@ const http_log = winston.loggers.get('http');
 ```
 
 ## License
+
 Apache 2.0
 
 ## Code of Conduct
+
 Please note that this project is released with a [Contributor Code of Conduct](code-of-conduct.md).
 By participating in this project you agree to abide by its terms.
 
 ## Support
-Bugs, PRs, comments, suggestions welcomed!
+
+Bugs, PRs, comments, suggestions are all welcomed!
