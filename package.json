@@ -1,6 +1,6 @@
 {
   "name": "winston-cfg",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Enables [winston](https://github.com/winstonjs/winston) configuration via [node-config](https://github.com/lorenwest/node-config)",
   "keywords": [
     "TypeScript",
@@ -130,7 +130,6 @@
     "nsp": "^2.6.1",
     "nsp-formatter-checkstyle": "^1.0.1",
     "nsp-formatter-remarkup": "^1.0.2",
-    "parse-git-config": "^1.1.1",
     "pkg-ok": "^1.0.1",
     "remap-istanbul": "^0.9.1",
     "rimraf": "^2.5.4",
@@ -143,6 +142,7 @@
     "config": "^1.25.1",
     "lodash.merge": "^4.6.0",
     "mkdirp": "^0.5.1",
+    "parse-git-config": "^1.1.1",
     "semver": "^5.3.0",
     "winston": "^2.3.1"
   },
