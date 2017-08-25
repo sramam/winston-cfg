@@ -14,7 +14,7 @@ install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
   # install modules
-  - appveyor-retry yarn install
+  - appveyor-retry npm install
 
 build_script:
   - node --version
