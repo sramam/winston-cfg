@@ -57,7 +57,7 @@ export interface Config {
   filters?: Fn[];
 }
 
-export function winstonCfg(transportMap = {}, defaultCfg?: Config) {
+function initWinstonCfg(transportMap = {}, defaultCfg?: Config) {
   const cfg = merge(
     {
       transports: [{
@@ -84,6 +84,19 @@ export function winstonCfg(transportMap = {}, defaultCfg?: Config) {
   return winston;
 }
 
+let _logger = null;
+/**
+ * Initializes a winston logger using application configuration.
+ * Details in [README](../README.md). Provides a singleton instance.
+ *
+ * @param {any} [transportMap={}]
+ * @param {Config} [defaultCfg]
+ * @returns
+ */
+export function winstonCfg(transportMap = {}, defaultCfg?: Config) {
+  _logger = _logger || initWinstonCfg(transportMap, defaultCfg);
+  return _logger;
+}
 
 function makeTransportsArray(transports = [], transportMap) {
   return transports.map(t => {

@@ -14,7 +14,7 @@ const winston = require("winston");
 const mkdirp = require("mkdirp");
 const path = require("path");
 const config = require('config');
-function winstonCfg(transportMap = {}, defaultCfg) {
+function initWinstonCfg(transportMap = {}, defaultCfg) {
     const cfg = lodash_1.merge({
         transports: [{
                 type: 'Console'
@@ -27,6 +27,11 @@ function winstonCfg(transportMap = {}, defaultCfg) {
     winston.loggers.options.transports = _transports;
     addLoggers(loggers, transportMap);
     return winston;
+}
+let _logger = null;
+function winstonCfg(transportMap = {}, defaultCfg) {
+    _logger = _logger || initWinstonCfg(transportMap, defaultCfg);
+    return _logger;
 }
 exports.winstonCfg = winstonCfg;
 function makeTransportsArray(transports = [], transportMap) {
