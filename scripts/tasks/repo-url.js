@@ -64,7 +64,7 @@ exports.validate = () => {
     return;
   }
 
-  const config = gitcfg.keys(gitcfg.sync());
+  const config = gitcfg.expandKeys(gitcfg.sync());
 
   if (!(pkg && pkg.repository)) {
     console.log(
