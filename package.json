@@ -141,7 +141,7 @@
     "chalk": "^2.4.1",
     "config": "^1.30.0",
     "lodash.merge": "^4.6.1",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^0.5.2",
     "parse-git-config": "^2.0.2",
     "semver": "^5.5.0",
     "winston": "^2.4.0"
