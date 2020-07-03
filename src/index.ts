@@ -51,10 +51,10 @@ export interface Config {
    */
   transports?: any[];
 
-  levels?: string[];
+  levels?: winston.AbstractConfigSetLevels;
   colors?: string[];
   rewriters?: Fn[];
-  filters?: Fn[];
+  filters?: winston.MetadataFilter[];
 }
 
 function initWinstonCfg(transportMap = {}, defaultCfg?: Config) {
@@ -139,6 +139,6 @@ function addLoggers(cfg = [], transportMap) {
     // identical in structure to the custom-per-logger config.
     // Incredible, how long it took to find it the first time.
     // Hopefully it saves you some time!
-    return winston.loggers.add(_cfg.id).configure(_cfg);
+    return winston.loggers.add(_cfg.id, _cfg);
   });
 }

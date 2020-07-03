@@ -63,6 +63,6 @@ function addLoggers(cfg = [], transportMap) {
         _cfg.transports = _cfg.transports
             ? makeTransportsArray(_cfg.transports, transportMap)
             : winston.loggers.options.transports;
-        return winston.loggers.add(_cfg.id).configure(_cfg);
+        return winston.loggers.add(_cfg.id, _cfg);
     });
 }
