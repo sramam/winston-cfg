@@ -1,5 +1,7 @@
 # winston-cfg
 
+THIS MODULE IS NO LONGER ACTIVELY MAINTAINED.
+
 <!-- badge -->
 [![npm license](https://img.shields.io/npm/l/winston-cfg.svg)](https://www.npmjs.com/package/winston-cfg)
 [![travis status](https://img.shields.io/travis/sramam/winston-cfg.svg)](https://travis-ci.org/sramam/winston-cfg)
