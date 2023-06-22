@@ -143,7 +143,7 @@
     "lodash.merge": "^4.6.1",
     "mkdirp": "^0.5.1",
     "parse-git-config": "^2.0.2",
-    "semver": "^5.5.0",
+    "semver": "^7.5.2",
     "winston": "^2.4.0"
   },
   "standard": {
